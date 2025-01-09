@@ -17,14 +17,19 @@ const Catalog = () => {
     const [loading,setLoading]=useState(false)
 
     
+   
+
     //Fetch all Categories
     useEffect(()=>{
         const getCategories=async()=>{
+            try{
             const res=await apiConnector("GET",categories.CATEGORIES_API)
             const category_id=res?.data?.data?.filter((ct)=> ct.name.split(" ").join("-").toLowerCase()=== catalogName.split(" ").join("-").toLowerCase())[0]._id
                 
             setCategoryId(category_id)
-            
+            }catch(error){
+                console.log("Could not fetch Categories.", error)
+            }
         }
         getCategories()
     },[catalogName])
@@ -50,6 +55,7 @@ const Catalog = () => {
         }
     },[categoryId])
 
+  console.log(catalogPageData)
 
   return (
     <div className='box-content bg-richblack-800 px-4'>

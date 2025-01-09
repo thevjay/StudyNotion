@@ -1,88 +1,102 @@
 const otpTemplate = (otp) => {
-	return `<!DOCTYPE html>
-	<html>
-	
-	<head>
-		<meta charset="UTF-8">
-		<title>OTP Verification Email</title>
-		<style>
-			body {
-				background-color: #ffffff;
-				font-family: Arial, sans-serif;
-				font-size: 16px;
-				line-height: 1.4;
-				color: #333333;
-				margin: 0;
-				padding: 0;
-			}
-	
-			.container {
-				max-width: 600px;
-				margin: 0 auto;
-				padding: 20px;
-				text-align: center;
-			}
-	
-			.logo {
-				max-width: 200px;
-				margin-bottom: 20px;
-			}
-	
-			.message {
-				font-size: 18px;
-				font-weight: bold;
-				margin-bottom: 20px;
-			}
-	
-			.body {
-				font-size: 16px;
-				margin-bottom: 20px;
-			}
-	
-			.cta {
-				display: inline-block;
-				padding: 10px 20px;
-				background-color: #FFD60A;
-				color: #000000;
-				text-decoration: none;
-				border-radius: 5px;
-				font-size: 16px;
-				font-weight: bold;
-				margin-top: 20px;
-			}
-	
-			.support {
-				font-size: 14px;
-				color: #999999;
-				margin-top: 20px;
-			}
-	
-			.highlight {
-				font-weight: bold;
-			}
-		</style>
-	
-	</head>
-	
-	<body>
-		<div class="container">
-			<a href="https://studynotion-edtech-project.vercel.app"><img class="logo"
-					src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudyNotion Logo"></a>
-			<div class="message">OTP Verification Email</div>
-			<div class="body">
-				<p>Dear User,</p>
-				<p>Thank you for registering with StudyNotion. To complete your registration, please use the following OTP
-					(One-Time Password) to verify your account:</p>
-				<h2 class="highlight">${otp}</h2>
-				<p>This OTP is valid for 5 minutes. If you did not request this verification, please disregard this email.
-				Once your account is verified, you will have access to our platform and its features.</p>
-			</div>
-			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at 
-                <a href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!
+    return `<!DOCTYPE html>
+    <html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>OTP Verification</title>
+        <style>
+            body {
+                background-color: #f9f9f9;
+                font-family: 'Arial', sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            .logo {
+                max-width: 150px;
+                margin: 0 auto 20px;
+            }
+
+            .header {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: #007BFF;
+            }
+
+            .message {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .otp {
+                font-size: 28px;
+                font-weight: bold;
+                color: #FF5722;
+                margin: 20px 0;
+            }
+
+            .cta {
+                margin-top: 20px;
+                display: inline-block;
+                padding: 10px 25px;
+                font-size: 16px;
+                color: #fff;
+                background-color: #28a745;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+
+            .cta:hover {
+                background-color: #218838;
+            }
+
+            .footer {
+                margin-top: 20px;
+                font-size: 14px;
+                color: #666;
+            }
+
+            .footer a {
+                color: #007BFF;
+                text-decoration: none;
+            }
+
+            .footer a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png" alt="Company Logo">
+            <div class="header">Verify Your Account</div>
+            <div class="message">Use the OTP below to complete your registration:</div>
+            <div class="otp">${otp}</div>
+            <a class="cta" href="https://your-website.com/verify">Verify Now</a>
+            <div class="footer">
+                <p>If you didn’t request this email, you can safely ignore it.</p>
+                <p>Need help? Contact us at <a href="mailto:support@yourcompany.com">support@yourcompany.com</a>.</p>
             </div>
-		</div>
-	</body>
-	
-	</html>`;
+        </div>
+    </body>
+    
+    </html>`;
 };
+
 module.exports = otpTemplate;

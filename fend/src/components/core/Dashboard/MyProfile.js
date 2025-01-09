@@ -14,9 +14,7 @@ const MyProfile = () => {
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
-    // useEffect(()=>{
-    //     dispatch(getUserDetails())
-    // })
+    
   return (
     <div>
         <div className='mb-12'>

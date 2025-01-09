@@ -60,7 +60,7 @@ exports.showAllCategories=async(req,res)=>{
 exports.categoryPageDetails = async (req,res) => {
   try {
       const { categoryId } = req.body
-        //console.log("PRINTING CATEGORY ID: ", categoryId);
+      //console.log("PRINTING CATEGORY ID: ", categoryId);
         // Get courses for the specified category
       const selectedCourses = await Category.findById(categoryId)
         .populate({
@@ -70,7 +70,7 @@ exports.categoryPageDetails = async (req,res) => {
         })
         .exec()
 
-        console.log("SELECTED COURSE", selectedCourses)
+       // console.log("SELECTED COURSE", selectedCourses)
       // Handle the case when the category is not found
       if (!selectedCourses) {
         console.log("Category not found.")
@@ -79,10 +79,10 @@ exports.categoryPageDetails = async (req,res) => {
           .json({ success: false, message: "Category not found" })
         }
 
-      console.log("SELECTED COURSE length", selectedCourses.course)
+      //console.log("SELECTED COURSE length", selectedCourses.course.length)
       // Handle the case when there are no courses
       if (selectedCourses.course.length === 0) {
-        console.log("No courses found for the selected category.")
+        //console.log("No courses found for the selected category.")
         return res.status(404).json({
           success: false,
           message: "No courses found for the selected category.",
@@ -92,9 +92,10 @@ exports.categoryPageDetails = async (req,res) => {
       // Get courses for other categories
       const categoriesExceptSelected = await Category.find({
           _id: { $ne: categoryId },
-          course: { $not: { $size: 0 } }
+          //course: { $not: { $size: 0 } }
       })
-      console.log("categoriesExceptSelected", categoriesExceptSelected)
+      
+      //console.log("categoriesExceptSelected", categoriesExceptSelected)
       let differentCourses = await Category.findOne(
         categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
           ._id
@@ -129,6 +130,7 @@ exports.categoryPageDetails = async (req,res) => {
           success:true
       })
   } catch (error) {
+    console.error(error)
       return res.status(500).json({
     success: false,
     message: "Internal server error",

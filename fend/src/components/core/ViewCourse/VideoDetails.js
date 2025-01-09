@@ -19,6 +19,7 @@ const VideoDetails = () => {
     const {courseSectionData,courseEntireData,complectedLectures}=useSelector((state)=>state.viewCourse);
 
     const [videoData,setVideoData]=useState([])
+    const [previewSource, setPreviewSource] =useState('')
     const [videoEnded,setVideoEnded]=useState(false)
     const [loading,setLoading]=useState(false)
 
@@ -38,12 +39,15 @@ const VideoDetails = () => {
                 const filteredVideoData=filteredData?.[0].subSection.filter((data)=>data._id === subSectionId)
 
                 setVideoData(filteredVideoData[0])
+                setPreviewSource(courseEntireData.thumbnail)
                 setVideoEnded(false)
             }
         }
         setVideoSpecificDetails();
     },[courseSectionData,courseEntireData,location.pathname])
 
+
+      // check if the lecture is the first video of the course
      const isFirstVideo=()=>{
 
         const currentSectionIndex=courseSectionData.findIndex(
@@ -82,6 +86,7 @@ const VideoDetails = () => {
 
      }
 
+    // go to the next video
      const goToNextVideo=()=>{
         const currentSectionIndex=courseSectionData.findIndex(
             (data)=>data._id === sectionId
@@ -152,11 +157,15 @@ const VideoDetails = () => {
      }
 
   return (
-    <div className='text-white'>
+    <div className='text-white flex flex-col gap-5 '>
         {
             !videoData 
             ? (<div>
-                No Data Found 
+                    <img
+                        src={previewSource}
+                        alt='Preview'
+                        className='h-full w-full rounded-md object-cover'
+                    />
             </div>)
             : (
                 <Player
@@ -167,16 +176,24 @@ const VideoDetails = () => {
                     src={videoData?.videoUrl}
                 >
                     <BigPlayButton position='center'/>
-
+                    {/* Render When Video Ends */}
                     {
                         videoEnded && (
-                            <div>
+                            <div 
+                            style={{
+                                backgroundImage:
+                                  "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
+                              }}
+                              className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+                        
+                            >
                                 {
                                     !complectedLectures.includes(subSectionId) && (
                                         <IconBtn
                                             disabled={loading}
                                             onclick={()=>handleLectureComplation()}
                                             text={!loading ? "Mark As Completed" : "Loading..."}
+                                            customClasses="text-xl max-w-max px-4 mx-auto"
                                         />
                                     )
                                 }
@@ -185,11 +202,13 @@ const VideoDetails = () => {
                                     disabled={loading}
                                     onclick={()=>{
                                         if(playerRef?.current){
+                                             // set the current time of the video to 0
                                             playerRef.current?.seek(0);
                                             setVideoEnded(false)
                                         }
                                     }}
                                     text="Rewatch"
+                                    customClasses="text-xl max-w-max px-4 mx-auto mt-2"
                                 />
 
                                 <div className='mt-10 min-w-[250px] justify-center gap-x-4 text-xl'>
@@ -234,3 +253,5 @@ const VideoDetails = () => {
 }
 
 export default VideoDetails
+
+//video
