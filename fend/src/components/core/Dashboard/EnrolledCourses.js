@@ -70,9 +70,9 @@ const EnrolledCourses = () => {
                     <p>{course.courseName}</p>
                     <p>
                       {
-                        course.description.length>50 
-                        ? `${course.description.slice(0,50)}...`
-                        : course.description
+                        course.courseDescription.length>50 
+                        ? `${course.courseDescription.slice(0,50)}...`
+                        : course.courseDescription
                       }
                     </p>
                   </div>

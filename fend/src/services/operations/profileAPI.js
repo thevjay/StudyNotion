@@ -65,6 +65,7 @@ export async function getUserEnrolledCourses(token) {
             throw new Error(response.data.message)
         }
 
+        console.log(response.data.data)
         result=response?.data?.data
     }
     catch(error){

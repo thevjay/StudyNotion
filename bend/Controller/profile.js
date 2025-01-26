@@ -214,7 +214,7 @@ exports.getEnrolledCourses = async (req, res) => {
 		  courseID: userDetails.courses[i]._id,
 		  userId: userId,
 		})
-		courseProgressCount = courseProgressCount?.completedVideos.length
+		courseProgressCount = courseProgressCount?.complectedVideos.length
 		if (SubsectionLength === 0) {
 		  userDetails.courses[i].progressPercentage = 100
 		} else {
@@ -238,6 +238,7 @@ exports.getEnrolledCourses = async (req, res) => {
         data: userDetails.courses,
       })
     } catch (error) {
+        console.error(error)
       return res.status(500).json({
         success: false,
         message: error.message,

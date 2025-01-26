@@ -23,7 +23,7 @@ const VideoDetails = () => {
     const [videoEnded,setVideoEnded]=useState(false)
     const [loading,setLoading]=useState(false)
 
-
+    console.log(complectedLectures)
     useEffect(()=>{
         const setVideoSpecificDetails=async()=>{
             if(!courseSectionData.length)

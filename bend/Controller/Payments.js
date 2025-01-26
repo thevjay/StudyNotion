@@ -6,8 +6,7 @@ const {courseEnrollmentEmail}=require('../mail/templates/courseEnrollmentEmail')
 const CourseProgress=require('../model/CourseProgressModel')
 const  mongoose = require('mongoose')
 const crypto=require('crypto')
-
-
+const { paymentSuccessEmail } = require('./../mail/templates/paymentSuccessEmail')
 
 
 //initiate the razorpay order
@@ -202,15 +201,15 @@ exports.sendPaymentSuccessEmail=async(req,res)=>{
         await mailSender(
             user.email,
             `Payment Recieved`,
-            paymentSuccessEmaul(`${user.firstName}`),
+            paymentSuccessEmail(`${user.firstName}`),
             amount/100,orderId,paymentId
         )
     }
     catch(error){
-        console.log("error in sending mail",error)
+        console.error("error in sending mail",error)
         return res.status(500).json({
             success:false,
-            message:"Could not send email"
+            message:"Could not send email"+error
         })
     }
 }

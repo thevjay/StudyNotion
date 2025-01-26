@@ -10,6 +10,7 @@ import { apiConnector } from '../../services/apiconnector';
 import { categories } from '../../services/apis'
 import {IoIosArrowDown} from "react-icons/io"
 import {RxHamburgerMenu} from "react-icons/rx"
+import { ACCOUNT_TYPE } from '../../utils/constants'
 
 
 
@@ -122,7 +123,7 @@ const Navbar = () => {
             {/* Login/SignUp/Dashboard */}
             <div className='flex flex-row gap-x-4 items-center'>
                 {
-                     user && user?.accountType !== 'Instructor' && (
+                     user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
                         <Link to='/dashboard/cart' className='relative pr-2'>
                             <AiOutlineShoppingCart className='text-2xl text-richblack-100'/>
                             {
