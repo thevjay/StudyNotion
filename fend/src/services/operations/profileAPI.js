@@ -24,7 +24,7 @@ export function getUserDetails(token,navigate){
                 Authorization:`Bearer ${token}`
             })
 
-            console.log("GET_USER_DETAILS API RESPONSE.........",response)
+            //console.log("GET_USER_DETAILS API RESPONSE.........",response)
 
             if(!response.data.success){
                 throw new Error(response.data.message)
@@ -65,7 +65,7 @@ export async function getUserEnrolledCourses(token) {
             throw new Error(response.data.message)
         }
 
-        console.log(response.data.data)
+        //console.log(response.data.data)
         result=response?.data?.data
     }
     catch(error){
@@ -85,7 +85,7 @@ export async function getInstructorData(token) {
       {
         Authorization: `Bearer ${token}`
       } )
-      console.log("GET_INSTRUCTOR_DATA_API response....", response)
+      //console.log("GET_INSTRUCTOR_DATA_API response....", response)
       result= response?.data?.courses
     } catch (error) {
       console.log("GET_INSTRUCTOR_DATA_API API ERROR............", error.response ? error.response.data:error)

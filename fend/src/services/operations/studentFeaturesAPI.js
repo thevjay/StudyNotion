@@ -43,13 +43,12 @@ export async function buyCourse(token,courses,userDetails,navigate,dispatch){
                                 Authorization:`Bearer ${token}`
                             })
 
-        console.log("orderResponse",orderResponse)
+        //console.log("orderResponse",orderResponse)
         if(!orderResponse.data.success){
             throw new Error(orderResponse.data.message)
         }
 
-        console.log("Order Initialized, printing order response", orderResponse);
-
+        
         //options
         const options={
             key:process.env.RAZORPAY_KEY,
