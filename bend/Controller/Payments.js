@@ -26,7 +26,7 @@ exports.capturePayment = async (req, res) => {
     for (const course of courses){
 
         const courseId=typeof course === 'string' ? course : course.courseId
-        console.log("CourseId number",courseId)
+        //console.log("CourseId number",courseId)
 
         try {
             
@@ -55,7 +55,7 @@ exports.capturePayment = async (req, res) => {
         }
     }
     
-    console.log("The amount in capturePayment is", totalAmount)
+    //console.log("The amount in capturePayment is", totalAmount)
     const currency = "INR"
     const options = {
         amount: totalAmount * 100,
@@ -81,7 +81,7 @@ exports.capturePayment = async (req, res) => {
 
 //verify the payment  Signature
 exports.verifyPayment=async(req,res)=>{
-    console.log("request in verifyPayment is", req)
+    //console.log("request in verifyPayment is", req)
     const razorpay_order_id = req.body?.razorpay_order_id;
     const razorpay_payment_id = req.body?.razorpay_payment_id;
     const razorpay_signature = req.body?.razorpay_signature;
@@ -170,7 +170,7 @@ const enrollStudents=async(courses,userId,res)=>{
                 courseEnrollmentEmail(updatedCourse.courseName, `${updatedStudent.firstName}`)
             )
 
-            console.log("Email Sent Successfully",emailResponse.response)
+            //console.log("Email Sent Successfully",emailResponse.response)
         }
         catch(error){
             console.log(error);

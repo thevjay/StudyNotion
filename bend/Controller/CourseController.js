@@ -36,9 +36,7 @@ exports.createCourse=async(req,res)=>{
         const tag=JSON.parse(_tag)
         const instructions=JSON.parse(_instructions)
 
-        console.log("tag",tag)
-        console.log("instructions",instructions)
-
+        
         //Check if any of the required fields are missing
         if(
             !courseName ||
@@ -87,8 +85,7 @@ exports.createCourse=async(req,res)=>{
             process.env.FOLDER_NAME
         )
 
-        console.log(thumbnailImage)
-
+        
         //update the TAG ka schema
         //TODO:HW
         // const tagDetails=await tag.findById(tag)
@@ -136,8 +133,7 @@ exports.createCourse=async(req,res)=>{
         )
 
     
-        console.log("HEREEEEEEEE",categoryDetails2)
-
+        
         // Return the new course and a success message
         res.status(200).json({
             success: true,
@@ -147,7 +143,7 @@ exports.createCourse=async(req,res)=>{
     }
     catch(error){
         //Hande any Errors that occur during the creation of the course
-        console.log(error)
+        console.error(error)
         res.status(500).json({
             success:false,
             message:"Failed to Create Course",
@@ -353,8 +349,6 @@ exports.getFullCourseDetails = async (req, res) => {
         courseID: courseId,
         userId: userId,
       })
-  
-      console.log("courseProgressCount : ", courseProgressCount)
   
       if (!courseDetails) {
         return res.status(400).json({

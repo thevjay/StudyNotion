@@ -10,7 +10,7 @@ const MyProfile = () => {
 
     const {user}=useSelector((state)=>state.profile)
 
-    console.log("My Profile",user)
+    //console.log("My Profile",user)
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
