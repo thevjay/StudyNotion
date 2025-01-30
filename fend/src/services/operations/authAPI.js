@@ -110,9 +110,9 @@ export function login(email,password,navigate){
                 password,
             })
 
-            console.log("LOGIN API RESPONSE............", response)
+            //console.log("LOGIN API RESPONSE............", response)
 
-            console.log(response.data.success)
+            //console.log(response.data.success)
 
             if(!response.data.success){
                 throw new Error(response.data.message) 
@@ -161,7 +161,7 @@ export function getPasswordResetToken(email,setEmailSent){
 
         try{
             const response=await apiConnector("POST",RESETPASSTOKEN_API,{email})
-            console.log("RESETPASSTOKEN_API RESPONSE............",response)
+            //console.log("RESETPASSTOKEN_API RESPONSE............",response)
 
             console.log(response.data.success)
 
@@ -192,7 +192,7 @@ export function resetPassword(password,confirmPassword,token,navigate){
                 password,confirmPassword,token
             })
 
-            console.log("RESETPASSWORD_API RESPONSE............", response)
+            //console.log("RESETPASSWORD_API RESPONSE............", response)
 
             console.log(response.data.success)
       
