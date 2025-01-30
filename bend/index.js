@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(
 	cors({
-		origin:'http://localhost:3000',
+		origin:process.env.FRONTEND_URL,
 		credentials:true,
 	})
 )
@@ -52,6 +52,11 @@ app.use('/api/v1/profile',profileRoutes)
 app.use('/api/v1/course',courseRoutes)
 app.use('/api/v1/payment',paymentRoutes)
 
+
+app.get("/", (req, res) => {
+	res.send("Backend is running...");
+});
+  
 
 //Listening to the server
 app.listen(PORT,()=>{
