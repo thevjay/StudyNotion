@@ -4,7 +4,7 @@ import logo from '../../assets/Logo/Logo-Full-Light.png'
 import {NavbarLinks} from '../../data/Navbar-Link'
 import { useSelector } from 'react-redux'
 
-import {AiOutlineShoppingCart} from "react-icons/ai"
+import {AiOutlineMenu, AiOutlineShoppingCart} from "react-icons/ai"
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiconnector';
 import { categories } from '../../services/apis'
@@ -17,16 +17,13 @@ import { ACCOUNT_TYPE } from '../../utils/constants'
 const Navbar = () => {
 
     const {token}=useSelector((state)=>state.auth)
-    // console.log("token in Navbar is",token)
-
     const {user}=useSelector((state)=>state.profile)
-    // console.log("User in Navbar is",user)
-
     const {totalItems}=useSelector((state)=>state.cart)
     const location=useLocation()
 
-    // api call
     const [subLinks,setSubLinks]=useState([])
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     // const subLinks=[
     //     {
@@ -41,14 +38,11 @@ const Navbar = () => {
 
     const fetchSublinks=async()=>{
         try{
-
             const result=await apiConnector('GET',categories.CATEGORIES_API)
-
-            // console.log("Printing Sublinks result:",result)
              setSubLinks(result.data.data)
-                     }
+        }
         catch(error){
-            console.log("Could not fetch the category list");
+            console.log("Could not fetch the category list",error);
         }
     }
 
@@ -61,17 +55,41 @@ const Navbar = () => {
         return matchPath({path:route},location.pathname);
     }
 
+    const handleMenuToggle =()=> setIsMenuOpen((prev)=> !prev)
+
+    const renderMobileMenu = () =>(
+        <div className={`right-0 top-0 z-50 h-full w-3/4 transform bg-richblack-800 shadow-md transition-transform md:hidden ${isMenuOpen?"translate-x-0":"translate-x-full"}`}>
+            <div className='flex items-center justify-between border-b border-richblack-700 p-4'>
+                <img src={logo} alt='Logo' width={120} height={24} loading='lazy' />
+                <button>
+                    <AiOutlineMenu fontSize={24} fill='#AFB2BF'/>
+                </button>
+            </div>
+            <div>
+                {NavbarLinks.map((link,index)=>(
+                    <div key={index}>
+                        {link.title === 'Catalog' ?(
+                            <div>
+                                <p>{link.title}</p>
+                            </div>
+                        ):("")}
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+
   return (
     <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700'>
-       <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
+       <div className='flex w-full max-w-maxContent items-center justify-between'>
             
             {/* Image */}
-            <Link to={'/'}>
+            <Link to={'/'} className='border'>
                 <img src={logo} alt='' width={160} height={32} loading='lazy' />
             </Link>
 
             {/* Nav Links */}
-            <nav>
+            <nav className='hidden md:block'>
                 <ul className='flex flex-row gap-x-6 text-richblack-50'>
                     {
                         NavbarLinks.map((link,i)=>(
@@ -121,7 +139,7 @@ const Navbar = () => {
             </nav>
 
             {/* Login/SignUp/Dashboard */}
-            <div className='flex flex-row gap-x-4 items-center'>
+            <div className='hidden md:flex flex-row gap-x-4 items-center'>
                 {
                      user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
                         <Link to='/dashboard/cart' className='relative pr-2'>
@@ -159,10 +177,13 @@ const Navbar = () => {
                     token !== null &&<ProfileDropDown/>
                 }
             </div>
-{/* 
-            <div className='mr-4 md:hidden text-[#AFB2BF] scale-150'>
-                <RxHamburgerMenu/>
-            </div> */}
+
+            <button className='mr-4 md:hidden' onClick={handleMenuToggle}>
+                <AiOutlineMenu fontSize={24} fill='#AFB2BF'/>
+            </button>
+            
+            {renderMobileMenu()}
+
        </div>
     </div>
   )
