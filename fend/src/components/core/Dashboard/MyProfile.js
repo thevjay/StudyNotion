@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import IconBtn from '../../common/IconBtn'
 import { RiEditBoxLine } from "react-icons/ri"
-import { getUserDetails } from '../../../services/operations/profileAPI'
 
 
 const MyProfile = () => {
@@ -12,7 +10,7 @@ const MyProfile = () => {
 
     //console.log("My Profile",user)
     const navigate=useNavigate()
-    const dispatch=useDispatch()
+
 
     
   return (
